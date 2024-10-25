@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown_selectionarea/flutter_markdown_selectionarea.dart';
 
+import 'custom/fade_block_syntax.dart';
 import 'custom/fade_builder.dart';
 import 'custom/fade_syntex.dart';
 import 'custom/rendrer/test/custom_markdown_body.dart';
+import 'package:markdown/markdown.dart' as markdown;
 
 class FadingMarkdownDifference extends StatefulWidget {
   const FadingMarkdownDifference({super.key});
@@ -72,13 +74,18 @@ class _FadingMarkdownDifferenceState extends State<FadingMarkdownDifference>
       ),
       body: SingleChildScrollView(
         child: SelectionArea(
-          child: MarkdownCustomBody(
+          child: MarkdownBody(
             builders: {
               "fadein": FadeBuilder(),
             },
-            inlineSyntaxes: [
-              FadeSyntax(),
-            ],
+            // inlineSyntaxes: [
+            //   FadeSyntax(),
+            // ],
+            extensionSet: markdown.ExtensionSet(
+              [FadeBlockSyntax()],
+              [FadeInlineSyntax()],
+            ),
+
             data: previousText +
                 (newText.startsWith(" ")
                     ? " <span data-color='rgb(0,0,255)'>" + newText.trim()
