@@ -242,7 +242,7 @@ class _MarkdownCustomWidgetState extends State<MarkdownCustomWidget>
 
     // Parse the source Markdown data into nodes of an Abstract Syntax Tree.
     final List<String> lines = const LineSplitter().convert(widget.data);
-    final List<md.Node> astNodes = document.parse(lines.join(''))
+    final List<md.Node> astNodes = document.parse(lines.join('\n'))
         // .parseLineList(lines)
         // .parse(lines)
         // .parseLines(lines)
